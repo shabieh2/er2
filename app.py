@@ -78,8 +78,8 @@ class VideoTransformer(VideoTransformerBase):
             img=cv2.rectangle(img, p0, p1, 
                                      self.rgb_colors[int(label)], 2) 
             
-            img = cv2.putText(img,'Tesla Car',p0, cv2.FONT_HERSHEY_SIMPLEX,
-                    0.8, (0, 255, 0), 1)
+#             img = cv2.putText(img,'Tesla Car',p0, cv2.FONT_HERSHEY_SIMPLEX,
+#                     0.8, (0, 255, 0), 1)
              
 
         return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
