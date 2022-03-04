@@ -102,7 +102,8 @@ st.success('Loading the model.. Done!')
 #sidebar
 prediction_mode = st.sidebar.radio(
     "",
-    ('Realtime Stream'),
+    ('Image',
+     'Realtime Stream'),
     index=0)
     
 classes_selector = st.sidebar.multiselect('Select classes', 
@@ -122,7 +123,7 @@ rgb_colors = get_colors(target_class_ids)
 detected_ids = None
 
 
-if prediction_mode == 'Single image':
+if prediction_mode == 'Image':
 
    
     uploaded_file = st.file_uploader(
