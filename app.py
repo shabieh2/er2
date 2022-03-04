@@ -127,7 +127,7 @@ rgb_colors = get_colors(target_class_ids)
 detected_ids = None
 
 
-if prediction_mode == 'Single image':
+if prediction_mode == 'Single Image':
 
    
     uploaded_file = st.file_uploader(
