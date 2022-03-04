@@ -167,7 +167,8 @@ if prediction_mode == 'Single Image':
             
             img_draw = cv2.putText(img_draw,str(CLASSES[int(label)])+' '+str(conf2)[:4],p0, cv2.FONT_HERSHEY_SIMPLEX,
                      0.8, rgb_colors[int(label)], 2)
-            detected_ids.append(label)
+            
+            detected_ids.append(int(label))
         
         
         
