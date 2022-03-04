@@ -22,7 +22,7 @@ st.title('Realtime Fire Detection')
 @st.cache(max_entries=2)
 def get_yolo5():
     
-    return torch.hub.load('./yolov5', 'custom', path='best3.pt',source='local')  # 
+    return torch.hub.load('./yolov5', 'custom', path='best33.pt',source='local')  # 
 
 @st.cache(max_entries=10)
 def get_preds(img : np.ndarray) -> np.ndarray:
