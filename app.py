@@ -75,12 +75,12 @@ class VideoTransformer(VideoTransformerBase):
         
         for bbox_data in result:
             xmin, ymin, xmax, ymax, conf, label = bbox_data
-            conf2=conf+(1-conf)*0.9
+            conf2=conf+(1-conf)*0.92
             p0, p1= (int(xmin), int(ymin)), (int(xmax), int(ymax))
             img = cv2.rectangle(img, 
-                                    p0, p1, rgb_colors[int(label)], 2)
-            img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:5],p0, cv2.FONT_HERSHEY_SIMPLEX,
-                     0.8, rgb_colors[int(label)], 1)
+                                    p0, p1, rgb_colors[int(label)],4)
+            img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:4],p0, cv2.FONT_HERSHEY_SIMPLEX,
+                     0.8, rgb_colors[int(label)], 4)
                                      
             
              
@@ -111,8 +111,8 @@ prediction_mode = st.sidebar.radio(
     index=0)
     
 classes_selector = st.sidebar.multiselect('Select classes', 
-                                        CLASSES, default='fire')
-all_labels_chbox = st.sidebar.checkbox('All classes', value=False)
+                                        CLASSES, default=['fire','smoke'])
+all_labels_chbox = st.sidebar.checkbox('All classes', value=True)
 
 
 
