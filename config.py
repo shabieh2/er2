@@ -1,6 +1,6 @@
 from streamlit_webrtc import ClientSettings
 
-CLASSES = ['fire']
+CLASSES = ['fire','smoke']
 
 
 WEBRTC_CLIENT_SETTINGS = ClientSettings(
