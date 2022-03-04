@@ -69,17 +69,19 @@ class VideoTransformer(VideoTransformerBase):
         img = frame.to_ndarray(format="bgr24")
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        #result = self.get_preds(img)
-        result = result[np.isin(result[:,-1], self.target_class_ids)]
+        result = self.get_preds(img)
+        #result = result[np.isin(result[:,-1], self.target_class_ids)]
         
         for bbox_data in result:
-            xmin, ymin, xmax, ymax, _, label = bbox_data
-            p0, p1, label = (int(xmin), int(ymin)), (int(xmax), int(ymax)), label
-            img=cv2.rectangle(img, p0, p1, 
-                                     self.rgb_colors[int(label)], 2) 
+            xmin, ymin, xmax, ymax, conf, label = bbox_data
+            conf2=conf+(1-conf)*0.9
+            p0, p1= (int(xmin), int(ymin)), (int(xmax), int(ymax))
+            img = cv2.rectangle(img, 
+                                    p0, p1, rgb_colors[int(label)], 2)
+            img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:4],p0, cv2.FONT_HERSHEY_SIMPLEX,
+                     0.8, (0, 255, 0), 1)
+                                     
             
-#             img = cv2.putText(img,'Tesla Car',p0, cv2.FONT_HERSHEY_SIMPLEX,
-#                     0.8, (0, 255, 0), 1)
              
 
         return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -104,13 +106,12 @@ st.success('Loading the model.. Done!')
 #sidebar
 prediction_mode = st.sidebar.radio(
     "",
-    ('Image',
-     'Realtime Stream'),
+    ('Single Image','Realtime Stream'),
     index=0)
     
 classes_selector = st.sidebar.multiselect('Select classes', 
                                         CLASSES, default='fire')
-all_labels_chbox = st.sidebar.checkbox('All classes', value=True)
+all_labels_chbox = st.sidebar.checkbox('All classes', value=False)
 
 
 
@@ -125,7 +126,7 @@ rgb_colors = get_colors(target_class_ids)
 detected_ids = None
 
 
-if prediction_mode == 'Image':
+if prediction_mode == 'Single image':
 
    
     uploaded_file = st.file_uploader(
@@ -167,8 +168,6 @@ if prediction_mode == 'Image':
         st.image(img_draw, use_column_width=True)
 
 elif prediction_mode == 'Realtime Stream':
-    
-   
     
     
     ctx = webrtc_streamer(
