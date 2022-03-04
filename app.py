@@ -78,6 +78,9 @@ class VideoTransformer(VideoTransformerBase):
             img = cv2.rectangle(img, 
                                     p0, p1, 
                                      self.rgb_colors[int(label)], 2) 
+            
+            img = cv2.putText(img 'Tesla Car', (825, 212), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.8, (0, 255, 0), 1)
              
 
         return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -108,7 +111,7 @@ prediction_mode = st.sidebar.radio(
     
 classes_selector = st.sidebar.multiselect('Select classes', 
                                         CLASSES, default='fire')
-all_labels_chbox = st.sidebar.checkbox('All classes', value=False)
+all_labels_chbox = st.sidebar.checkbox('All classes', value=True)
 
 
 
@@ -165,6 +168,20 @@ if prediction_mode == 'Image':
         st.image(img_draw, use_column_width=True)
 
 elif prediction_mode == 'Realtime Stream':
+    
+    cap = cv2.VideoCapture(0)
+    while cap.isOpened():
+    ret, frame = cap.read()
+    
+    # Make detections 
+    results = model(frame)
+    
+    cv2.imshow('YOLO', np.squeeze(results.render()))
+    
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+        break
+    cap.release()
+    cv2.destroyAllWindows()
     
     
     ctx = webrtc_streamer(
