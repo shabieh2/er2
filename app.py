@@ -80,7 +80,7 @@ class VideoTransformer(VideoTransformerBase):
             img = cv2.rectangle(img, 
                                     p0, p1, rgb_colors[int(label)], 2)
             img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:5],p0, cv2.FONT_HERSHEY_SIMPLEX,
-                     0.8, (0, 255, 0), 1)
+                     0.8, rgb_colors[int(label)], 1)
                                      
             
              
