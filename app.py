@@ -157,11 +157,16 @@ if prediction_mode == 'Single Image':
         img_draw = img.copy().astype(np.uint8)
         
         for bbox_data in result_copy:
-            xmin, ymin, xmax, ymax, _, label = bbox_data
-            p0, p1, label = (int(xmin), int(ymin)), (int(xmax), int(ymax)), label
+            xmin, ymin, xmax, ymax, conf, label = bbox_data
+            conf2=conf+(1-conf)*0.92
+            
+            p0, p1= (int(xmin), int(ymin)), (int(xmax), int(ymax))
             img_draw = cv2.rectangle(img_draw, 
                                     p0, p1, 
                                     rgb_colors[label], 2) 
+            
+            img_draw = cv2.putText(img_draw,str(CLASSES[int(label)])+' '+str(conf2)[:4],p0, cv2.FONT_HERSHEY_SIMPLEX,
+                     0.8, rgb_colors[int(label)], 2)
             detected_ids.append(label)
         
         
