@@ -16,7 +16,7 @@ from config import CLASSES, WEBRTC_CLIENT_SETTINGS
 # )
 im1 = Image.open('./a.png')
 st.image(im1, use_column_width=True)
-st.title('    Realtime Fire Detection')
+st.title('.    Realtime Fire Detection')
 
 
 @st.cache(max_entries=2)
