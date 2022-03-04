@@ -75,7 +75,7 @@ class VideoTransformer(VideoTransformerBase):
         for bbox_data in result:
             xmin, ymin, xmax, ymax, _, label = bbox_data
             p0, p1, label = (int(xmin), int(ymin)), (int(xmax), int(ymax)), label
-            cv2.rectangle(img, p0, p1, 
+            img=cv2.rectangle(img, p0, p1, 
                                      self.rgb_colors[int(label)], 2) 
             
             img = cv2.putText(img,'Tesla Car',p0, cv2.FONT_HERSHEY_SIMPLEX,
