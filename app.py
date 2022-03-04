@@ -79,7 +79,7 @@ class VideoTransformer(VideoTransformerBase):
                                     p0, p1, 
                                      self.rgb_colors[int(label)], 2) 
             
-            img = cv2.putText(img 'Tesla Car', (825, 212), cv2.FONT_HERSHEY_SIMPLEX,
+            img = cv2.putText(img,'Tesla Car', (825, 212), cv2.FONT_HERSHEY_SIMPLEX,
                     0.8, (0, 255, 0), 1)
              
 
