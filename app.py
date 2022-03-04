@@ -69,8 +69,8 @@ class VideoTransformer(VideoTransformerBase):
         img = frame.to_ndarray(format="bgr24")
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        result = self.get_preds(img)
-        #result = result[np.isin(result[:,-1], self.target_class_ids)]
+        #result = self.get_preds(img)
+        result = result[np.isin(result[:,-1], self.target_class_ids)]
         
         for bbox_data in result:
             xmin, ymin, xmax, ymax, _, label = bbox_data
