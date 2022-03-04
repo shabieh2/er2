@@ -189,8 +189,4 @@ elif prediction_mode == 'Realtime Stream':
         ctx.video_transformer.target_class_ids = target_class_ids
 
 
-detected_ids = set(detected_ids if detected_ids is not None else target_class_ids)
-labels=list(detected_ids)[0]
-labels = [CLASSES[index] for index in detected_ids]
-legend_df = pd.DataFrame({'label': labels})
-st.dataframe(legend_df.style.applymap(get_legend_color))
+
