@@ -11,11 +11,12 @@ from streamlit_webrtc import VideoTransformerBase, webrtc_streamer
 
 from config import CLASSES, WEBRTC_CLIENT_SETTINGS
 
-st.set_page_config(
-    page_title="Ember Optics Realtime Wildfire Detection",
-)
-
-st.title('Ember Optics Realtime Wildfire Detection')
+# st.set_page_config(
+#     page_title="Ember Optics Realtime Wildfire Detection",
+# )
+im1 = Image.open('./a.png')
+st.image(im1, use_column_width=True)
+st.title('Ember Optics Realtime Fire Detection')
 
 
 @st.cache(max_entries=2)
@@ -78,7 +79,7 @@ class VideoTransformer(VideoTransformerBase):
             p0, p1= (int(xmin), int(ymin)), (int(xmax), int(ymax))
             img = cv2.rectangle(img, 
                                     p0, p1, rgb_colors[int(label)], 2)
-            img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:4],p0, cv2.FONT_HERSHEY_SIMPLEX,
+            img = cv2.putText(img,str(CLASSES[int(label)])+' '+str(conf2)[:5],p0, cv2.FONT_HERSHEY_SIMPLEX,
                      0.8, (0, 255, 0), 1)
                                      
             
