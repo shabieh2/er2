@@ -14,9 +14,9 @@ from config import CLASSES, WEBRTC_CLIENT_SETTINGS
 # st.set_page_config(
 #     page_title="Ember Optics Realtime Wildfire Detection",
 # )
-im1 = Image.open('./a.png')
-st.image(im1, use_column_width=True)
-st.title('Realtime Fire Detection')
+#im1 = Image.open('./a.png')
+#st.image(im1, use_column_width=True)
+st.title('Realtime Fire/Smoke Detection')
 
 
 @st.cache(max_entries=2)
